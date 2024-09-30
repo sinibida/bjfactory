@@ -1,8 +1,8 @@
-import { http } from "../../service/http/client.ts";
+import http from "../../service/http/client.ts";
 import Logger from "../../service/logger/index.ts";
 import { CommandModule } from "../../types/index.ts";
-import fs from 'fs';
 import { getFolderName, processProblemName } from "./logic.ts";
+import { loadTemplate } from "../../service/fs/problem.ts";
 
 interface Options {
   lang: string;
@@ -11,24 +11,26 @@ interface Options {
 async function Add(problem: number, options: Options) {
   const problemId = problem;
 
-    const response = await http.get("/problem/show", {
-      params: {
-        problemId,
-      },
-    });
+  const response = await http.get("/problem/show", {
+    params: {
+      problemId,
+    },
+  });
 
-    const lang = options.lang ?? "cpp";
-    const problemName = response.data.titleKo;
+  // TODO: prog. lang inquiry
 
-    const folderName = getFolderName({
-      id: problemId,
-      selectedLang: lang,
-      title: problemName,
-    });
+  const lang = options.lang ?? "cpp";
+  const problemName = response.data.titleKo;
 
-    fs.mkdirSync(folderName);
+  const folderName = getFolderName({
+    id: problemId,
+    selectedLang: lang,
+    title: problemName,
+  });
 
-    Logger.print(`Folder '${folderName}' succesfully created.`)
+  await loadTemplate(folderName, lang);
+
+  Logger.print(`Folder '${folderName}' succesfully created.`)
 }
 
 export default {

@@ -1,3 +1,7 @@
 import axios from "axios";
 
-export const http = axios.create({ baseURL: "https://solved.ac/api/v3" });
+const http = axios.create({ baseURL: "https://solved.ac/api/v3" });
+
+// TODO: ENOTFOUND (no internet) handler (w/ interceptor)
+
+export default http
