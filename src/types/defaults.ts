@@ -10,5 +10,6 @@ export const defaultProblemConfig: ProblemConfig = Object.freeze<ProblemConfig>(
     ansFile: 'ans.txt',
     build: [],
     run: "",
+    clean: [],
   }
 );

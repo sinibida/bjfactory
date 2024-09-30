@@ -35,4 +35,8 @@ export interface ProblemConfig {
    * The contents of `inFile` and `outFile` is piped through this command.
    */
   run: string;
+  /**
+   * A command to run after the test is done.
+   */
+  clean: string | string[];
 }

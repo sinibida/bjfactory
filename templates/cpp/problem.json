@@ -1,3 +1,10 @@
 {
-    
+    "inFile": "in.txt",
+    "outFile": "out.txt",
+    "ansFile": "ans.txt",
+    "build": [
+        "g++ program.cpp -o a.exe"
+    ],
+    "run": "a.exe",
+    "clean": "rm a.exe"
 }
