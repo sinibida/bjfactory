@@ -1,9 +1,9 @@
-import { http } from "../../service/http/client.js";
-import Logger from "../../service/logger/index.js";
-import { CommandModule } from "../../types/index.js";
+import { http } from "../../service/http/client.ts";
+import Logger from "../../service/logger/index.ts";
+import { CommandModule } from "../../types/index.ts";
 import fs from 'fs';
 
-function processProblemName(problemName: string) {
+export function processProblemName(problemName: string) {
   let ret = problemName;
 
   ret = ret.replace(/ /g, "-");

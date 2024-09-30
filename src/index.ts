@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Command } from "commander";
 import fs from "fs";
-import { registerCommands } from "./src/command/index.js";
+import { registerCommands } from "./command/index.ts";
 
 const program = new Command();
 

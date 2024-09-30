@@ -1,6 +1,6 @@
 import { Command } from "commander";
-import { CommandModule } from "../types/index.js";
-import Add from "./Add/index.js";
+import { CommandModule } from "../types/index.ts";
+import Add from "./Add/index.ts";
 
 const commands: CommandModule[] = [
   Add
