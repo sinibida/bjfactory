@@ -1,4 +1,6 @@
 // PLACEHOLDER
 // For E2E Tests
 
-test("Hello", () => {})
+test("Hello", () => {
+  const x: number = 10;
+})
