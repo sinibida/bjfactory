@@ -1,29 +1,40 @@
 import axios from "axios";
 import { Command } from "commander";
-import fs from 'fs';
+import fs from "fs";
 
 const program = new Command();
 
-const client = axios.create({baseURL: "https://solved.ac/api/v3"});
+const client = axios.create({ baseURL: "https://solved.ac/api/v3" });
+
+function processProblemName(problemName: string) {
+  let ret = problemName;
+
+  ret = ret.replace(/ /g, "-");
+
+  return ret;
+}
 
 program
-  .command('add <problem>')
+  .command("add <problem>")
   .usage("2042")
   .description("create a problem folder on the working directory")
-  .alias('a')
+  .alias("a")
   .option("-l, --lang <codename>", "language to code")
   .action(async (problem, options) => {
     const problemId = problem;
 
-    const response = await client.get("/problem/show", {params: {
-      problemId,
-    }})
+    const response = await client.get("/problem/show", {
+      params: {
+        problemId,
+      },
+    });
 
     const lang = options.lang ?? "cpp";
-    const problemName = response.data.titleKo;
+    const problemName = processProblemName(response.data.titleKo);
 
-    fs.mkdirSync(`./${problemId}-${lang}-${problemName}`)
-  })
+    const folderName = `./${problemId}-${lang}-${problemName}`;
 
-program
-  .parse(process.argv);
+    fs.mkdirSync(folderName);
+  });
+
+program.parse(process.argv);
