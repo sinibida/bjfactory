@@ -15,6 +15,10 @@ interface Options {
   // Insert option params here
 }
 
+async function runCmds(cmd: string | string[]) {
+  await Promise.all(ensureArray(cmd).map((x) => execCommand(x)));
+}
+
 async function Test(target: string, options: Options) {
   const dir = await searchProblemDirectories({
     keyword: target,
@@ -29,16 +33,20 @@ async function Test(target: string, options: Options) {
   const config = await loadConfigWithDefault(dirStr);
 
   await withCwd(dirStr, async () => {
-    await Promise.all(ensureArray(config.build).map((x) => execCommand(x)));
+    await runCmds(config.build);
 
     await withTestStreams(config, async (inFile, outFile, _) => {
-      await execPipedCommand(config.run, inFile, outFile, {resetOutFile: true});
+      await execPipedCommand(config.run, inFile, outFile, {
+        resetOutFile: true,
+      });
     });
 
     await withTestStreams(config, async (_, outFile, ansFile) => {
       const diff = await getDiff(outFile, ansFile);
       printDiff(diff);
     });
+
+    await runCmds(config.clean);
   });
 }
 
