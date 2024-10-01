@@ -23,7 +23,7 @@ export function execPipedCommand(
   outFile: FileHandle
 ) {
   return new Promise<undefined>((res, rej) => {
-    const proc = spawn(cmd, {})
+    const proc = spawn(path.resolve(cmd), {})
   
     const inStream = inFile.createReadStream();
     const outStream = outFile.createWriteStream();
@@ -39,5 +39,9 @@ export function execPipedCommand(
         rej()
       }
     });
+
+    proc.on('error', (err) => {
+      throw err;
+    })
   });
 }
