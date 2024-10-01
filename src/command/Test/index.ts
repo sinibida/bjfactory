@@ -1,3 +1,4 @@
+import { Option } from "commander";
 import { getDiff } from "../../service/diff/index.js";
 import {
   execCommand,
@@ -12,7 +13,7 @@ import { ensureArray } from "./logic.js";
 import { printDiff } from "./utils.js";
 
 interface Options {
-  // Insert option params here
+  clean: boolean;
 }
 
 async function runCmds(cmd: string | string[]) {
@@ -46,7 +47,7 @@ async function Test(target: string, options: Options) {
       printDiff(diff);
     });
 
-    await runCmds(config.clean);
+    if (options.clean) await runCmds(config.clean);
   });
 }
 
@@ -58,7 +59,7 @@ export default {
       .usage("2042-cpp")
       .description("")
       // .alias("")
-      // .option("", "")
+      .option("-n, --no-clean", "")
       .action(Test);
   },
 } satisfies CommandModule;
