@@ -6,7 +6,7 @@ export interface CommandModule {
 
 export type ProblemState = "active" | "solved" | "later";
 
-export interface ProblemConfig {
+ export interface ProblemConfig {
   id: number;
   name: string;
   /**

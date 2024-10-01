@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 import { ProblemConfig } from "../../../types";
-import { isProblemConfig } from "../../../impls/ProblemConfig";
+import { isValidProblemConfig } from "../../../impls/ProblemConfig";
 
 const configFileName = "problem.json";
 
@@ -14,7 +14,7 @@ export async function loadConfig(dir: string) {
 
   const obj = JSON.parse(content);
 
-  isProblemConfig(obj, () => {
+  isValidProblemConfig(obj, () => {
     throw Error("Parse failed:"); // TODO: Error Details
   });
 
