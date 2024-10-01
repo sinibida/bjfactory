@@ -9,7 +9,5 @@ export async function getDiff(outFile: FileHandle, ansFile: FileHandle) {
 
   const changes = diffWords(out, ans);
 
-  console.log(out, ans, changes);
-
   return changes;
 }
