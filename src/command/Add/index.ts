@@ -2,7 +2,7 @@ import http from "../../service/http/client.ts";
 import Logger from "../../service/logger/index.ts";
 import { CommandModule } from "../../types/index.ts";
 import { getFolderName, processProblemName } from "./logic.ts";
-import { loadTemplate } from "../../service/fs/problem.ts";
+import { loadTemplate } from "../../service/fs/template.ts";
 
 interface Options {
   lang: string;
