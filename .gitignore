@@ -145,4 +145,7 @@ dist
 
 .vscode/*
 !.vscode/*.code-snippets
+
+# E2E test folders
 2042-*/
+2739-*/
