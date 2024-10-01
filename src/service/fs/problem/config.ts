@@ -21,10 +21,22 @@ export async function loadConfig(dir: string) {
   return obj as ProblemConfig;
 }
 
-export async function saveConfig(dir: string, config: ProblemConfig) {
-  await fs.writeFile(getConfigPath(dir), JSON.stringify(config), {
+export async function saveConfig(
+  dir: string,
+  config: ProblemConfig,
+  options: {
+    jsonSpace: number;
+  }
+) {
+  const { jsonSpace }: typeof options = {
+    ...options,
+    jsonSpace: 2,
+  };
+
+  const stringified = JSON.stringify(config, undefined, jsonSpace);
+  await fs.writeFile(getConfigPath(dir), stringified, {
     encoding: "utf8",
     flush: true,
-    flag: fs.constants.O_WRONLY | fs.constants.O_CREAT
+    flag: fs.constants.O_WRONLY | fs.constants.O_CREAT,
   });
 }
