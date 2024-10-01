@@ -20,28 +20,35 @@ export function execCommand(cmd: string) {
 export function execPipedCommand(
   cmd: string,
   inFile: FileHandle,
-  outFile: FileHandle
+  outFile: FileHandle,
+  {
+    resetOutFile = false,
+  }: {
+    resetOutFile?: boolean;
+  }
 ) {
   return new Promise<undefined>((res, rej) => {
-    const proc = spawn(path.resolve(cmd), {})
-  
+    const proc = spawn(path.resolve(cmd), {});
+
+    if (resetOutFile) outFile.truncate(0);
+
     const inStream = inFile.createReadStream();
     const outStream = outFile.createWriteStream();
-  
+
     inStream.pipe(proc.stdin);
 
     proc.stdout.pipe(outStream);
 
-    proc.on('close', (code, signal) => {
+    proc.on("close", (code, signal) => {
       if (code === 0) {
         res(undefined);
       } else {
-        rej()
+        rej();
       }
     });
 
-    proc.on('error', (err) => {
+    proc.on("error", (err) => {
       throw err;
-    })
+    });
   });
 }

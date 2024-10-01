@@ -31,8 +31,11 @@ async function Test(target: string, options: Options) {
   await withCwd(dirStr, async () => {
     await Promise.all(ensureArray(config.build).map((x) => execCommand(x)));
 
-    await withTestStreams(config, async (inFile, outFile, ansFile) => {
-      await execPipedCommand(config.run, inFile, outFile);
+    await withTestStreams(config, async (inFile, outFile, _) => {
+      await execPipedCommand(config.run, inFile, outFile, {resetOutFile: true});
+    });
+
+    await withTestStreams(config, async (_, outFile, ansFile) => {
       const diff = await getDiff(outFile, ansFile);
       printDiff(diff);
     });
