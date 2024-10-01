@@ -10,8 +10,11 @@ interface Options {
   lang: string;
 }
 
-async function Add(problem: number, options: Options) {
-  const problemId = problem;
+async function Add(problem: string, options: Options) {
+  const problemId = parseInt(problem, 10);
+  if (Number.isNaN(problemId)) {
+    throw Error("Invalid args");
+  }
 
   const response = await getProblemInfo(problemId);
 
