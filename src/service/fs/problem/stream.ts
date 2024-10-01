@@ -8,7 +8,7 @@ export async function withTestStreams(
   const inFile = await fs.open(config.inFile, fs.constants.O_RDONLY);
   const outFile = await fs.open(
     config.outFile,
-    fs.constants.O_WRONLY | fs.constants.O_CREAT | fs.constants.O_TRUNC
+    fs.constants.O_RDWR | fs.constants.O_CREAT | fs.constants.O_TRUNC
   );
   const ansFile = await fs.open(config.ansFile, fs.constants.O_RDONLY);
 
