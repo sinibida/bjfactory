@@ -46,5 +46,5 @@ export async function* searchProblemDirectories(props: {
       yield dirStr;
     }
   }
-  await iter.close();
+  // await iter.close();
 }
