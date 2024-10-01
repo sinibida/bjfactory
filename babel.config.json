@@ -2,5 +2,7 @@
   "presets": [
     ["@babel/preset-env", { "targets": { "node": "current" } }],
     ["@babel/preset-typescript", { "rewriteImportExtensions": true }]
-  ]
+  ],
+  // TODO: Would need to seperate this on dev/pro
+  "retainLines": true
 }
