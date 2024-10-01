@@ -1,7 +1,10 @@
 import fs from "fs/promises";
 import path from "path";
 import { ProblemConfig } from "../../../types";
-import { isValidProblemConfig } from "../../../impls/ProblemConfig";
+import {
+  defaultProblemConfig,
+  isValidProblemConfig,
+} from "../../../impls/ProblemConfig";
 
 const configFileName = "problem.json";
 
@@ -18,17 +21,28 @@ export async function loadConfig(dir: string) {
     throw Error("Parse failed:"); // TODO: Error Details
   });
 
-  return obj as ProblemConfig;
+  return obj as Partial<ProblemConfig>;
+}
+
+export async function loadConfigWithDefault(
+  dir: string
+): Promise<ProblemConfig> {
+  const partial = await loadConfig(dir);
+
+  return {
+    ...defaultProblemConfig,
+    ...partial,
+  };
 }
 
 export async function saveConfig(
   dir: string,
-  config: ProblemConfig,
-  options: {
+  config: Partial<ProblemConfig>,
+  options: Partial<{
     jsonSpace: number;
-  }
+  }> = {}
 ) {
-  const { jsonSpace }: typeof options = {
+  const { jsonSpace }: Required<typeof options> = {
     ...options,
     jsonSpace: 2,
   };
