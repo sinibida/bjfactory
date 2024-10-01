@@ -1,5 +1,6 @@
-import { ProblemConfig } from "../..";
+import { ProblemConfig } from "../../types";
 
+// TODO: Oh shit should be Partial<Config>
 export function isProblemConfig(
   obj: any,
   onError?: ({}) => void

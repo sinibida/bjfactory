@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
-import { isProblemConfig } from "../../../types/impls/ProblemConfig";
 import { ProblemConfig } from "../../../types";
+import { isProblemConfig } from "../../../impls/ProblemConfig";
 
 const configFileName = "problem.json";
 
