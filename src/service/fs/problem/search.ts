@@ -2,7 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 
 export function keywordCheck(targetPath: string, keyword: string) {
-  return targetPath.startsWith(keyword);
+  return path.basename(targetPath).startsWith(keyword);
 }
 
 export async function* searchProblemDirectories(props: {
