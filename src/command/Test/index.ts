@@ -9,8 +9,8 @@ import { loadConfigWithDefault } from "../../service/fs/problem/config.js";
 import { searchProblemDirectories, searchProblemDirectory } from "../../service/fs/problem/search.js";
 import { withTestStreams } from "../../service/fs/problem/stream.js";
 import { CommandModule } from "../../types/index.js";
-import { ensureArray } from "./logic.js";
 import { printDiff } from "./utils.js";
+import { ensureArray } from "../../utils/typeutil.js";
 
 interface Options {
   clean: boolean;
