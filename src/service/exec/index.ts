@@ -2,7 +2,9 @@ import { exec, spawn } from "child_process";
 import { createWriteStream } from "fs";
 import { FileHandle } from "fs/promises";
 import path from "path";
+import { stderr } from "process";
 import { promisify } from "util";
+import Logger from "../logger";
 
 export async function withCwd(cwd: string, func: () => any) {
   const stash = process.cwd();
@@ -28,7 +30,9 @@ export function execPipedCommand(
   }
 ) {
   return new Promise<undefined>((res, rej) => {
-    const proc = spawn(path.resolve(cmd), {});
+    const proc = spawn(cmd, {
+      shell: true,
+    });
 
     if (resetOutFile) outFile.truncate(0);
 
@@ -39,11 +43,13 @@ export function execPipedCommand(
 
     proc.stdout.pipe(outStream);
 
+    proc.stderr.pipe(stderr)
+
     proc.on("close", (code, signal) => {
       if (code === 0) {
         res(undefined);
       } else {
-        rej();
+        rej(new Error(`Execution failed with error code ${code}`));
       }
     });
 
