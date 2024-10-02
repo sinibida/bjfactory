@@ -5,7 +5,7 @@ export function keywordCheck(targetPath: string, keyword: string) {
   return path.basename(targetPath).startsWith(keyword);
 }
 
-export async function* searchProblemDirectories(props: {
+export interface ProblemDirectorySearch {
   /**
    * keyword to serach
    */
@@ -19,7 +19,21 @@ export async function* searchProblemDirectories(props: {
    * @default false
    */
   recursive?: boolean;
-}) {
+}
+
+export async function searchProblemDirectory(props: ProblemDirectorySearch) {
+  const dir = await searchProblemDirectories(props).next()
+
+  if (dir.done) {
+    return null;
+  }
+
+  const dirStr = dir.value;
+
+  return dirStr;
+}
+
+export async function* searchProblemDirectories(props: ProblemDirectorySearch) {
   const {
     keyword,
     searchSrc: searchSrcProp,

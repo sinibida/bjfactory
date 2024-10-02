@@ -6,7 +6,7 @@ import {
   withCwd,
 } from "../../service/exec/index.js";
 import { loadConfigWithDefault } from "../../service/fs/problem/config.js";
-import { searchProblemDirectories } from "../../service/fs/problem/search.js";
+import { searchProblemDirectories, searchProblemDirectory } from "../../service/fs/problem/search.js";
 import { withTestStreams } from "../../service/fs/problem/stream.js";
 import { CommandModule } from "../../types/index.js";
 import { ensureArray } from "./logic.js";
@@ -21,19 +21,17 @@ async function runCmds(cmd: string | string[]) {
 }
 
 async function Test(target: string, options: Options) {
-  const dir = await searchProblemDirectories({
+  const dir = await searchProblemDirectory({
     keyword: target,
-  }).next();
+  });
 
-  if (dir.done) {
+  if (dir === null) {
     throw Error("Problem folder not found");
   }
 
-  const dirStr = dir.value;
+  const config = await loadConfigWithDefault(dir);
 
-  const config = await loadConfigWithDefault(dirStr);
-
-  await withCwd(dirStr, async () => {
+  await withCwd(dir, async () => {
     await runCmds(config.build);
 
     await withTestStreams(config, async (inFile, outFile, _) => {
