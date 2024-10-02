@@ -51,6 +51,6 @@ export async function saveConfig(
   await fs.writeFile(getConfigPath(dir), stringified, {
     encoding: "utf8",
     flush: true,
-    flag: fs.constants.O_WRONLY | fs.constants.O_CREAT,
+    flag: fs.constants.O_WRONLY | fs.constants.O_CREAT | fs.constants.O_TRUNC,
   });
 }
