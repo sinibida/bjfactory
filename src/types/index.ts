@@ -1,12 +1,14 @@
 import { Command } from "commander";
 
+// TODO: Split Types
+
 export interface CommandModule {
   next: (program: Command) => void;
 }
 
 export type ProblemState = "active" | "solved" | "later";
 
- export interface ProblemConfig {
+export interface ProblemConfig {
   id: number;
   name: string;
   /**
@@ -31,7 +33,7 @@ export type ProblemState = "active" | "solved" | "later";
   build: string | string[];
   /**
    * A command to exercute the built executable, or interpret the script.
-   * 
+   *
    * The contents of `inFile` and `outFile` is piped through this command.
    */
   run: string;
@@ -39,4 +41,14 @@ export type ProblemState = "active" | "solved" | "later";
    * A command to run after the test is done.
    */
   clean: string | string[];
+}
+
+export interface BJFConfig {
+  selectedLanguages: string[];
+  rootDir: string;
+}
+
+export interface InitBJFParams {
+  selectedLanguages: string[];
+  rootDir: string;
 }

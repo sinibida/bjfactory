@@ -151,3 +151,4 @@ dist
 # E2E test folders
 2042-*/
 2739-*/
+e2e/
