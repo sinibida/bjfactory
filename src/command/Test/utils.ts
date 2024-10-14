@@ -5,9 +5,9 @@ export function printDiff(diff: Change[]) {
   // TODO: Use Logger
   diff.forEach(change => {
     if (change.added) {
-      console.log(colors.green(change.value));
+      console.log(colors.bgGreen(change.value));
     } else if (change.removed) {
-      console.log(colors.red(change.value));
+      console.log(colors.bgRed(change.value));
     } else {
       console.log(change.value);
     }
