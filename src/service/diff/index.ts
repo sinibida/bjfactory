@@ -7,7 +7,10 @@ export async function getDiff(outFile: FileHandle, ansFile: FileHandle) {
   const out = (await outFile.readFile()).toString();
   const ans = (await ansFile.readFile()).toString();
 
-  const changes = diffWords(out, ans);
+  const changes = diffWords(out, ans, {
+    ignoreWhitespace: false,
+    ignoreCase: false,
+  });
 
   return changes;
 }
