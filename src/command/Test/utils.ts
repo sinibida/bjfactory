@@ -5,11 +5,11 @@ export function printDiff(diff: Change[]) {
   // TODO: Use Logger
   diff.forEach(change => {
     if (change.added) {
-      console.log(colors.bgGreen(change.value));
+      process.stdout.write(colors.bgGreen(change.value));
     } else if (change.removed) {
-      console.log(colors.bgRed(change.value));
+      process.stdout.write(colors.bgRed(change.value));
     } else {
-      console.log(change.value);
+      process.stdout.write(change.value);
     }
   })
 }
