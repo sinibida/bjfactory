@@ -8,6 +8,8 @@ import {
 import { CommandModule } from "../../shared/types/index.js";
 import { printDiff } from "./utils.js";
 import { ensureArray } from "../../shared/utils/typeutil.js";
+import { problemApi } from "@/entities/problem/index.js";
+import { configApi } from "@/entities/config/index.js";
 
 interface Options {
   clean: boolean;
@@ -18,7 +20,7 @@ async function runCmds(cmd: string | string[]) {
 }
 
 async function Test(target: string, options: Options) {
-  const dir = await searchProblemDirectory({
+  const dir = await problemApi.search.searchProblemDirectory({
     keyword: target,
   });
 
@@ -26,21 +28,27 @@ async function Test(target: string, options: Options) {
     throw Error("Problem folder not found");
   }
 
-  const config = await loadConfigWithDefault(dir);
+  const config = await problemApi.config.loadConfigWithDefault(dir);
 
   await withCwd(dir, async () => {
     await runCmds(config.build);
 
-    await withTestStreams(config, async (inFile, outFile, _) => {
-      await execPipedCommand(config.run, inFile, outFile, {
-        resetOutFile: true,
-      });
-    });
+    await problemApi.exec.withTestStreams(
+      config,
+      async (inFile, outFile, _) => {
+        await execPipedCommand(config.run, inFile, outFile, {
+          resetOutFile: true,
+        });
+      },
+    );
 
-    await withTestStreams(config, async (_, outFile, ansFile) => {
-      const diff = await getDiff(outFile, ansFile);
-      printDiff(diff);
-    });
+    await problemApi.exec.withTestStreams(
+      config,
+      async (_, outFile, ansFile) => {
+        const diff = await getDiff(outFile, ansFile);
+        printDiff(diff);
+      },
+    );
 
     if (options.clean) await runCmds(config.clean);
   });

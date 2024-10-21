@@ -2,7 +2,7 @@
   "inFile": "in.txt",
   "outFile": "out.txt",
   "ansFile": "ans.txt",
-  "build": ["javac Main.java"],
-  "run": "java Main",
-  "clean": "rm Main.class"
+  "build": [],
+  "run": "program.py",
+  "clean": []
 }
