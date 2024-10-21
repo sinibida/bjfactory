@@ -1,10 +1,9 @@
-import http from "../../service/solvecac/client.ts";
-import Logger from "../../service/logger/index.ts";
-import { CommandModule, ProblemConfig } from "../../types/index.ts";
-import { getFolderName, processProblemName } from "./logic.ts";
-import { loadTemplate } from "../../service/fs/template.ts";
-import { getProblemInfo } from "../../service/solvecac/api/problem.ts";
-import { editConfigFile } from "../../service/fs/problem/compose.ts";
+import { editConfigFile } from "@/shared/api/fs/problem/compose";
+import { loadTemplate } from "@/shared/api/fs/template";
+import Logger from "@/shared/api/logger";
+import { getProblemInfo } from "@/shared/api/solvecac/api/problem";
+import { ProblemConfig, CommandModule } from "@/shared/types";
+import { getFolderName } from "./logic";
 
 interface Options {
   lang: string;

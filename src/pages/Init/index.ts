@@ -1,9 +1,7 @@
-import { CommandModule } from "../../types/index.js";
-import Logger from "../../service/logger/index.js";
-import { askLanguages, recommendAdd } from "./ui.js";
-import { initBJF } from "../../service/compose/bjf.js";
-import { Option } from "commander";
-import { prettyRelativePath } from "./logic.js";
+import { CommandModule } from "@/shared/types";
+import { initBJF } from "./lib/bjf";
+import { prettyRelativePath } from "./lib/logic";
+import { askLanguages, recommendAdd } from "./ui/ui";
 
 interface Options {
   lang: string[];
@@ -15,7 +13,7 @@ async function Init(directory: string | undefined, options: Options) {
 
   await initBJF({
     selectedLanguages,
-    rootDir
+    rootDir,
   });
 
   recommendAdd();

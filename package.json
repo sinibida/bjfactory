@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "check": "tsc --noEmit",
     "build": "npx babel src --extensions .ts,.js --out-dir dist",
     "dev": "npm run -s build && node dist/index.js"
   },

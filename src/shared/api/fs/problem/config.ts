@@ -4,7 +4,7 @@ import { ProblemConfig } from "../../../types";
 import {
   defaultProblemConfig,
   isValidProblemConfig,
-} from "../../../impls/ProblemConfig";
+} from "../../../../features/config/lib";
 
 const configFileName = "problem.json";
 

@@ -1,7 +1,7 @@
-import { CommandModule } from "../../types/index.js";
-import Logger from "../../service/logger/index.js";
-import { searchProblemDirectory } from "../../service/fs/problem/search.js";
-import { moveToArchive } from "../../service/fs/problem/archive.js";
+import { CommandModule } from "../../shared/types/index.js";
+import Logger from "../../shared/api/logger/index.js";
+import { searchProblemDirectory } from "../../shared/api/fs/problem/search.js";
+import { moveToArchive } from "../../shared/api/fs/problem/archive.js";
 
 interface Options {
   // Insert option params here

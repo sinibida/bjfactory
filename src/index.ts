@@ -1,12 +1,5 @@
 #!/usr/bin/env node
 
-import axios from "axios";
-import { Command } from "commander";
-import fs from "fs";
-import { registerCommands } from "./command/index.ts";
+import main from "./app/ui/main";
 
-const program = new Command();
-
-registerCommands(program);
-
-program.parse(process.argv);
+main();

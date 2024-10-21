@@ -1,4 +1,4 @@
-import { ProblemConfig } from "../../types";
+import { ProblemConfig } from "../../../shared/types";
 
 /**
  * Checks if the value provided meets the {@linkcode ProblemConfig} type.

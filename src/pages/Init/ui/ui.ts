@@ -1,7 +1,7 @@
-import { getAvailableLanguages } from "../../service/fs/rootpath";
-import Logger from "../../service/logger";
+import { getAvailableLanguages } from "@/shared/api/fs/rootpath";
+import Logger from "@/shared/api/logger";
+import { generatorToArray } from "@/shared/utils/typeutil";
 import { checkbox } from "@inquirer/prompts";
-import { generatorToArray } from "../../utils/typeutil";
 
 /**
  * Shows message asking what language the user's planning to use,

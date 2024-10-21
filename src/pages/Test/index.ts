@@ -1,16 +1,16 @@
 import { Option } from "commander";
-import { getDiff } from "../../service/diff/index.js";
+import { getDiff } from "../../shared/api/diff/index.js";
 import {
   execCommand,
   execPipedCommand,
   withCwd,
-} from "../../service/exec/index.js";
-import { loadConfigWithDefault } from "../../service/fs/problem/config.js";
-import { searchProblemDirectories, searchProblemDirectory } from "../../service/fs/problem/search.js";
-import { withTestStreams } from "../../service/fs/problem/stream.js";
-import { CommandModule } from "../../types/index.js";
+} from "../../shared/api/exec/index.js";
+import { loadConfigWithDefault } from "../../shared/api/fs/problem/config.js";
+import { searchProblemDirectories, searchProblemDirectory } from "../../shared/api/fs/problem/search.js";
+import { withTestStreams } from "../../shared/api/fs/problem/stream.js";
+import { CommandModule } from "../../shared/types/index.js";
 import { printDiff } from "./utils.js";
-import { ensureArray } from "../../utils/typeutil.js";
+import { ensureArray } from "../../shared/utils/typeutil.js";
 
 interface Options {
   clean: boolean;

@@ -43,12 +43,4 @@ export interface ProblemConfig {
   clean: string | string[];
 }
 
-export interface BJFConfig {
-  selectedLanguages: string[];
-  rootDir: string;
-}
 
-export interface InitBJFParams {
-  selectedLanguages: string[];
-  rootDir: string;
-}
