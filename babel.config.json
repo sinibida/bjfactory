@@ -3,6 +3,17 @@
     ["@babel/preset-env", { "targets": { "node": "current" } }],
     ["@babel/preset-typescript", { "rewriteImportExtensions": true }]
   ],
+
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./src" // Mistake: used array (`["./src"]`)
+        }
+      }
+    ]
+  ],
   // TODO: Would need to seperate this on dev/pro
   "retainLines": true
 }
