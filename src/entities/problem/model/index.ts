@@ -1,4 +1,3 @@
-
 export type ProblemState = "active" | "solved" | "later";
 
 export interface ProblemConfig {
@@ -35,5 +34,3 @@ export interface ProblemConfig {
    */
   clean: string | string[];
 }
-
-

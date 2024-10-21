@@ -1,16 +1,17 @@
 import path from "path";
 import fs from "fs/promises";
 
-const languageTemplatePath = './templates'
+const languageTemplatePath = "./templates";
 
 export function getRootPath() {
   if (require.main === undefined) {
-    throw Error("Can't access the package directory.")
+    throw Error("Can't access the package directory.");
   }
   return path.resolve(require.main?.path, "../");
 }
 
-export const getRootTemplatePath = () => path.resolve(getRootPath(), languageTemplatePath);
+export const getRootTemplatePath = () =>
+  path.resolve(getRootPath(), languageTemplatePath);
 
 export async function* getAvailableLanguages() {
   const iter = await fs.opendir(getRootTemplatePath());
@@ -22,5 +23,3 @@ export async function* getAvailableLanguages() {
     yield path.basename(dirStr);
   }
 }
-
-

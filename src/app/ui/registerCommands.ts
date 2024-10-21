@@ -5,15 +5,10 @@ import Test from "../../pages/Test/index.ts";
 import Archive from "../../pages/Archive/index.ts";
 import Init from "../../pages/Init/index.ts";
 
-const commands: CommandModule[] = [
-  Add,
-  Test,
-  Archive,
-  Init
-]
+const commands: CommandModule[] = [Add, Test, Archive, Init];
 
 export function registerCommands(program: Command) {
-  commands.forEach(x => {
+  commands.forEach((x) => {
     x.next(program);
-  })
+  });
 }

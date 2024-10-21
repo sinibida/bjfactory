@@ -1,20 +1,19 @@
 import { ploblemModel } from "@/entities/problem";
 
-
 type ProblemConfig = ploblemModel.ProblemConfig;
 
 /**
  * Checks if the value provided meets the {@linkcode ProblemConfig} type.
  */
 export function isPartialProblemConfig(
-  obj: any
+  obj: any,
 ): obj is Partial<ProblemConfig> {
   return true; // TODO
 }
 
 export function isProblemConfigValid(
   config: Partial<ProblemConfig>,
-  onFail?: (message: string) => void
+  onFail?: (message: string) => void,
 ) {
   return true; // TODO
 }
@@ -24,7 +23,7 @@ export function isProblemConfigValid(
  */
 export function isValidProblemConfig(
   obj: any,
-  onFail?: (message: string) => void
+  onFail?: (message: string) => void,
 ): obj is Partial<ProblemConfig> {
   if (isPartialProblemConfig(obj)) {
     if (isProblemConfigValid(obj, onFail)) {
@@ -45,5 +44,5 @@ export const defaultProblemConfig: ProblemConfig = Object.freeze<ProblemConfig>(
     build: [],
     run: "",
     clean: [],
-  }
+  },
 );

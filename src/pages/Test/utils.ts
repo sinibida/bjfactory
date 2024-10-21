@@ -1,17 +1,17 @@
-import colors from 'colors';
+import colors from "colors";
 import { Change } from "diff";
 
 function normalizeDiffWord(word: string) {
   if (/^[\n\r]+$/.test(word)) {
-    return word.replace(/\n/g, '\\n').replace(/\r/g, '\\r');
-  } 
+    return word.replace(/\n/g, "\\n").replace(/\r/g, "\\r");
+  }
 
   return word;
 }
 
 export function printDiff(diff: Change[]) {
   // TODO: Use Logger
-  diff.forEach(change => {
+  diff.forEach((change) => {
     const normValue = normalizeDiffWord(change.value);
     if (change.added) {
       process.stdout.write(colors.bgGreen(normValue));
@@ -20,5 +20,5 @@ export function printDiff(diff: Change[]) {
     } else {
       process.stdout.write(normValue);
     }
-  })
+  });
 }

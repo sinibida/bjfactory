@@ -24,7 +24,7 @@ export async function loadConfig(dir: string) {
 }
 
 export async function loadConfigWithDefault(
-  dir: string
+  dir: string,
 ): Promise<ProblemConfig> {
   const partial = await loadConfig(dir);
 
@@ -39,7 +39,7 @@ export async function saveConfig(
   config: Partial<ProblemConfig>,
   options: Partial<{
     jsonSpace: number;
-  }> = {}
+  }> = {},
 ) {
   const { jsonSpace }: Required<typeof options> = {
     ...options,
@@ -56,7 +56,7 @@ export async function saveConfig(
 
 export async function editConfig(
   modify: (config: Partial<ProblemConfig>) => Partial<ProblemConfig>,
-  dir: string
+  dir: string,
 ) {
   await saveConfig(dir, modify(await loadConfig(dir)));
 }

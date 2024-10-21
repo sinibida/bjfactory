@@ -1,5 +1,3 @@
-
-
 export function processProblemName(problemName: string) {
   let ret = problemName;
 
@@ -11,11 +9,11 @@ export function processProblemName(problemName: string) {
 export function getFolderName({
   id,
   title,
-  selectedLang
+  selectedLang,
 }: {
-  id: number,
-  title: string,
-  selectedLang: string,
+  id: number;
+  title: string;
+  selectedLang: string;
 }) {
   const processed = processProblemName(title);
 

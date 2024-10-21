@@ -8,8 +8,10 @@ import { checkbox } from "@inquirer/prompts";
  * and gets the answer.
  */
 export async function askLanguages(): Promise<string[]> {
-  const availableLangs: string[] = await generatorToArray(getAvailableLanguages());
-  
+  const availableLangs: string[] = await generatorToArray(
+    getAvailableLanguages(),
+  );
+
   const choices = await checkbox({
     message: "Select the languages you're planning to use.",
     choices: availableLangs.map((lang) => ({

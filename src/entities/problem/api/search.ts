@@ -22,7 +22,7 @@ export interface ProblemDirectorySearch {
 }
 
 export async function searchProblemDirectory(props: ProblemDirectorySearch) {
-  const dir = await searchProblemDirectories(props).next()
+  const dir = await searchProblemDirectories(props).next();
 
   if (dir.done) {
     return null;

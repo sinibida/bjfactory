@@ -6,7 +6,9 @@ export function ensureArray<T>(x: T | T[]) {
   }
 }
 
-export async function generatorToArray<T>(gen: AsyncGenerator<T, unknown, unknown>) {
+export async function generatorToArray<T>(
+  gen: AsyncGenerator<T, unknown, unknown>,
+) {
   let arr: T[] = [];
   for await (const x of gen) {
     arr.push(x);

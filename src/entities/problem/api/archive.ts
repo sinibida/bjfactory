@@ -8,7 +8,7 @@ const archiveDir = "./archive";
  * Create an archive folder when it doesn't exist.
  */
 export async function ensureArchiveFoler() {
-  if (!await isAccessible(archiveDir)) {
+  if (!(await isAccessible(archiveDir))) {
     await fs.mkdir(archiveDir);
   }
 }

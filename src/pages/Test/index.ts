@@ -5,9 +5,6 @@ import {
   execPipedCommand,
   withCwd,
 } from "../../shared/api/exec/index.js";
-;
-;
-;
 import { CommandModule } from "../../shared/types/index.js";
 import { printDiff } from "./utils.js";
 import { ensureArray } from "../../shared/utils/typeutil.js";

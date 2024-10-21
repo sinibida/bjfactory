@@ -18,7 +18,7 @@ export async function loadTemplate(probPath: string, templateCode: string) {
   await fs.cp(
     path.resolve(getTemplatePath(), templateCode),
     path.resolve(probPath),
-    { recursive: true }
+    { recursive: true },
   );
 }
 
@@ -30,6 +30,6 @@ export async function installTemplate(template: string) {
   await fs.cp(
     path.resolve(getRootTemplatePath(), template),
     path.resolve(getTemplatePath(), template),
-    { recursive: true }
+    { recursive: true },
   );
 }

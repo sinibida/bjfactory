@@ -3,4 +3,4 @@
 
 test("Hello", () => {
   const x: number = 10;
-})
+});

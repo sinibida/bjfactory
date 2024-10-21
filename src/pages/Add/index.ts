@@ -43,7 +43,7 @@ async function Add(problem: string, options: Options) {
       ...config,
       ...initialConfig,
     }),
-    folderName
+    folderName,
   );
 
   Logger.print(`Folder '${folderName}' succesfully created.`);
