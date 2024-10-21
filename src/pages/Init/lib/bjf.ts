@@ -1,8 +1,8 @@
 
 import { installTemplates } from "@/shared/api/fs/template";
-import { BJFConfig } from "@/features/config/model/BJFConfig";
+import { BJFConfig } from "@/entities/config/model/BJFConfig";
 import { InitBJFParams, fromInitBJFParamsToBJFConfig } from "../model/InitBJFParams";
-import { configApi } from "@/features/config";
+import { configApi } from "@/entities/config";
 
 export async function initBJF(props: InitBJFParams) {
   const {selectedLanguages} = props;

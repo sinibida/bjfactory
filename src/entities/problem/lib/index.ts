@@ -1,4 +1,7 @@
-import { ProblemConfig } from "../../../shared/types";
+import { ploblemModel } from "@/entities/problem";
+
+
+type ProblemConfig = ploblemModel.ProblemConfig;
 
 /**
  * Checks if the value provided meets the {@linkcode ProblemConfig} type.

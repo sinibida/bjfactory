@@ -1,4 +1,4 @@
-import { BJFConfig } from "@/features/config/model/BJFConfig";
+import { BJFConfig } from "@/entities/config/model/BJFConfig";
 
 export interface InitBJFParams {
   selectedLanguages: string[];

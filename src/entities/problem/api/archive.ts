@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import { isAccessible } from "../utils";
+import { isAccessible } from "../../../shared/api/fs/utils";
 
 const archiveDir = "./archive";
 

@@ -1,9 +1,11 @@
-import { editConfigFile } from "@/shared/api/fs/problem/compose";
 import { loadTemplate } from "@/shared/api/fs/template";
 import Logger from "@/shared/api/logger";
 import { getProblemInfo } from "@/shared/api/solvecac/api/problem";
-import { ProblemConfig, CommandModule } from "@/shared/types";
+import { CommandModule } from "@/shared/types";
 import { getFolderName } from "./logic";
+import { ploblemModel, problemApi } from "@/entities/problem";
+
+type ProblemConfig = ploblemModel.ProblemConfig;
 
 interface Options {
   lang: string;
@@ -36,7 +38,7 @@ async function Add(problem: string, options: Options) {
     state: "active",
   };
 
-  await editConfigFile(
+  await problemApi.config.editConfig(
     (config) => ({
       ...config,
       ...initialConfig,

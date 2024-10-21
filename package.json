@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
+    "prettier": "prettier --write .",
     "test": "jest",
     "check": "tsc --noEmit",
     "build": "npx babel src --extensions .ts,.js --out-dir dist",
@@ -16,7 +17,8 @@
     "axios": "^1.7.7",
     "colors": "^1.4.0",
     "commander": "^12.1.0",
-    "diff": "^7.0.0"
+    "diff": "^7.0.0",
+    "prettier": "^3.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.25.6",

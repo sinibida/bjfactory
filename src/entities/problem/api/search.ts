@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-export function keywordCheck(targetPath: string, keyword: string) {
+export function doesPathMatchKeyword(targetPath: string, keyword: string) {
   return path.basename(targetPath).startsWith(keyword);
 }
 
@@ -56,7 +56,7 @@ export async function* searchProblemDirectories(props: ProblemDirectorySearch) {
 
     const dirStr = path.resolve(dir.parentPath, dir.name);
 
-    if (keywordCheck(dirStr, keyword)) {
+    if (doesPathMatchKeyword(dirStr, keyword)) {
       yield dirStr;
     }
   }

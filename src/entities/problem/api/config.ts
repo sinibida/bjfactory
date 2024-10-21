@@ -1,10 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
-import { ProblemConfig } from "../../../types";
-import {
-  defaultProblemConfig,
-  isValidProblemConfig,
-} from "../../../../features/config/lib";
+import { ploblemModel } from "..";
+import { defaultProblemConfig, isValidProblemConfig } from "../lib";
+
+type ProblemConfig = ploblemModel.ProblemConfig;
 
 const configFileName = "problem.json";
 
@@ -53,4 +52,11 @@ export async function saveConfig(
     flush: true,
     flag: fs.constants.O_WRONLY | fs.constants.O_CREAT | fs.constants.O_TRUNC,
   });
+}
+
+export async function editConfig(
+  modify: (config: Partial<ProblemConfig>) => Partial<ProblemConfig>,
+  dir: string
+) {
+  await saveConfig(dir, modify(await loadConfig(dir)));
 }

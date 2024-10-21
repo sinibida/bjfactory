@@ -1,4 +1,4 @@
-import { BJFConfig } from "@/features/config/model/BJFConfig";
+import { BJFConfig } from "@/entities/config/model/BJFConfig";
 import fs from "fs/promises";
 import path from "path";
 

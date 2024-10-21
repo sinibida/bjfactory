@@ -1,5 +1,8 @@
-import { ProblemConfig } from "../../../types";
+
 import fs, { FileHandle } from "fs/promises";
+import { ploblemModel } from "..";
+
+type ProblemConfig = ploblemModel.ProblemConfig;
 
 export async function withTestStreams(
   config: ProblemConfig,
