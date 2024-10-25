@@ -2,7 +2,7 @@ import { loadTemplate } from "@/shared/api/fs/template";
 import Logger from "@/shared/api/logger";
 import { getProblemInfo } from "@/shared/api/solvecac/api/problem";
 import { CommandModule } from "@/shared/types";
-import { getFolderName } from "./logic";
+import { getFolderName, getProblemFolderName } from "./logic";
 import { ploblemModel, problemApi } from "@/entities/problem";
 import { askTemplate } from "@/features/SelectTemplate";
 
@@ -13,26 +13,15 @@ interface Options {
 }
 
 async function Add(problem: string, options: Options) {
-  const problemId = parseInt(problem, 10);
-  if (Number.isNaN(problemId)) {
-    throw Error("Invalid args");
-  }
-
-  const response = await getProblemInfo(problemId);
-
   const lang = options.lang ?? (await askTemplate("Select a template to use."));
-  const problemName = response.titleKo;
 
-  const folderName = getFolderName({
-    id: problemId,
-    selectedLang: lang,
-    title: problemName,
-  });
+  // TODO: support different kind of 'problem input'
+  const { problemName, folderName } = await getProblemFolderName(problem, lang);
 
   await loadTemplate(folderName, lang);
 
   const initialConfig: Partial<ProblemConfig> = {
-    id: problemId,
+    id: folderName,
     name: problemName,
     state: "active",
   };

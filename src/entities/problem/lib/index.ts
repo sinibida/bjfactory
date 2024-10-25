@@ -35,7 +35,7 @@ export function isValidProblemConfig(
 
 export const defaultProblemConfig: ProblemConfig = Object.freeze<ProblemConfig>(
   {
-    id: 0,
+    id: "foo",
     name: "undefined",
     state: "active",
     inFile: "in.txt",

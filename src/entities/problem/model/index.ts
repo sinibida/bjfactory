@@ -1,7 +1,7 @@
 export type ProblemState = "active" | "solved" | "later";
 
 export interface ProblemConfig {
-  id: number;
+  id: string;
   name: string;
   /**
    * @default 'active'
