@@ -1,27 +1,14 @@
-import { getAvailableLanguages } from "@/shared/api/fs/rootpath";
+import { askTemplateMulti } from "@/features/SelectTemplate";
 import Logger from "@/shared/api/logger";
-import { generatorToArray } from "@/shared/utils/typeutil";
-import { checkbox } from "@inquirer/prompts";
 
 /**
  * Shows message asking what language the user's planning to use,
  * and gets the answer.
  */
 export async function askLanguages(): Promise<string[]> {
-  const availableLangs: string[] = await generatorToArray(
-    getAvailableLanguages(),
-  );
-
-  const choices = await checkbox({
+  return await askTemplateMulti({
     message: "Select the languages you're planning to use.",
-    choices: availableLangs.map((lang) => ({
-      name: lang,
-      value: lang,
-    })),
-    required: true,
   });
-
-  return choices;
 }
 
 export function recommendAdd() {

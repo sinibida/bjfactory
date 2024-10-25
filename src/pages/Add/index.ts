@@ -4,6 +4,7 @@ import { getProblemInfo } from "@/shared/api/solvecac/api/problem";
 import { CommandModule } from "@/shared/types";
 import { getFolderName } from "./logic";
 import { ploblemModel, problemApi } from "@/entities/problem";
+import { askTemplate } from "@/features/SelectTemplate";
 
 type ProblemConfig = ploblemModel.ProblemConfig;
 
@@ -19,9 +20,7 @@ async function Add(problem: string, options: Options) {
 
   const response = await getProblemInfo(problemId);
 
-  // TODO: prog. lang inquiry
-
-  const lang = options.lang ?? "cpp";
+  const lang = options.lang ?? (await askTemplate("Select a template to use."));
   const problemName = response.titleKo;
 
   const folderName = getFolderName({
@@ -52,7 +51,7 @@ async function Add(problem: string, options: Options) {
 export default {
   next(program) {
     program
-      .command("add <problem>")
+      .command("add [problem]")
       .usage("2042")
       .description("create a problem folder on the working directory")
       .alias("a")
