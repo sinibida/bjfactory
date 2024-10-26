@@ -16,6 +16,42 @@ export function execCommand(cmd: string) {
   return promisify(exec)(cmd);
 }
 
+function spawnPipedCommand(
+  cmd: string,
+  inStream: NodeJS.ReadableStream,
+  outStream: NodeJS.WritableStream,
+) {
+  const proc = spawn(cmd, {
+    shell: true,
+  });
+
+  inStream.pipe(proc.stdin);
+
+  proc.stdout.pipe(outStream);
+
+  proc.stderr.pipe(stderr);
+
+  return proc;
+}
+
+export function execInteractiveCommand(cmd: string) {
+  return new Promise<undefined>((res, rej) => {
+    const proc = spawnPipedCommand(cmd, process.stdin, process.stdout);
+
+    proc.on("close", (code, signal) => {
+      if (code === 0) {
+        res(undefined);
+      } else {
+        rej(new Error(`Execution failed with error code ${code}`));
+      }
+    });
+
+    proc.on("error", (err) => {
+      throw err;
+    });
+  });
+}
+
 export function execPipedCommand(
   cmd: string,
   inFile: FileHandle,
@@ -27,20 +63,13 @@ export function execPipedCommand(
   },
 ) {
   return new Promise<undefined>((res, rej) => {
-    const proc = spawn(cmd, {
-      shell: true,
-    });
-
     if (resetOutFile) outFile.truncate(0);
 
-    const inStream = inFile.createReadStream();
-    const outStream = outFile.createWriteStream();
-
-    inStream.pipe(proc.stdin);
-
-    proc.stdout.pipe(outStream);
-
-    proc.stderr.pipe(stderr);
+    const proc = spawnPipedCommand(
+      cmd,
+      inFile.createReadStream(),
+      outFile.createWriteStream(),
+    );
 
     proc.on("close", (code, signal) => {
       if (code === 0) {

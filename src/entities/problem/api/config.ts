@@ -1,9 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
-import { ploblemModel } from "..";
 import { defaultProblemConfig, isValidProblemConfig } from "../lib";
-
-type ProblemConfig = ploblemModel.ProblemConfig;
+import { ProblemConfig } from "../model";
 
 const configFileName = "problem.json";
 
