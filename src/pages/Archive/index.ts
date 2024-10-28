@@ -1,4 +1,4 @@
-import { problemApi } from "@/entities/problem/index.js";
+import { problemApi } from "@/entities/Problem/index.js";
 import { getTargetDirectory } from "@/features/SelectTarget";
 import Logger from "@/shared/api/logger";
 import { CommandModule } from "@/shared/types";

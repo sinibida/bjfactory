@@ -1,4 +1,4 @@
-import { FactoryConfig, defaultFactory } from "@/entities/Factory";
+import { Factory, defaultFactory } from "@/entities/Factory";
 
 export interface InitBJFParams {
   selectedLanguages: string[];
@@ -9,6 +9,5 @@ export function fromInitBJFParamsToBJFConfig(data: InitBJFParams) {
   return {
     ...defaultFactory,
     rootDir: data.rootDir,
-    selectedLanguages: data.selectedLanguages,
-  } satisfies FactoryConfig;
+  } satisfies Factory;
 }

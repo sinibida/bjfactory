@@ -9,8 +9,8 @@ import {
 import { CommandModule } from "../../shared/types/index.js";
 import { printDiff } from "./utils.js";
 import { ensureArray } from "../../shared/utils/typeutil.js";
-import { problemApi, ProblemConfig } from "@/entities/problem/index.js";
-import { configApi } from "@/entities/Factory/index.js";
+import { problemApi, Problem } from "@/entities/Problem/index.js";
+import { factoryApi } from "@/entities/Factory/index.js";
 import { getTargetDirectory } from "@/features/SelectTarget/index.js";
 
 interface Options {
@@ -18,7 +18,7 @@ interface Options {
   interactive: boolean;
 }
 
-async function runUninteractiveTest(config: ProblemConfig) {
+async function runUninteractiveTest(config: Problem) {
   await problemApi.exec.withTestStreams(config, async (inFile, outFile, _) => {
     await execPipedCommand(config.run, inFile, outFile, {
       resetOutFile: true,

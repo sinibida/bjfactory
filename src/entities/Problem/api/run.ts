@@ -1,10 +1,8 @@
 import fs, { FileHandle } from "fs/promises";
-import { ploblemModel } from "..";
-
-type ProblemConfig = ploblemModel.ProblemConfig;
+import { Problem } from "../model";
 
 export async function withTestStreams(
-  config: ProblemConfig,
+  config: Problem,
   func: (inFile: FileHandle, outFile: FileHandle, ansFile: FileHandle) => void,
 ) {
   const inFile = await fs.open(config.inFile, fs.constants.O_RDONLY);

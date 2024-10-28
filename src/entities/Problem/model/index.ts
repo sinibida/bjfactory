@@ -1,8 +1,10 @@
+import { BaseProblemMetadata } from "@/shared/types";
+
 export type ProblemState = "active" | "solved" | "later";
 
-export interface ProblemConfig {
-  id: string;
-  name: string;
+export interface Problem {
+  title: string;
+  metadata: BaseProblemMetadata | null;
   /**
    * @default 'active'
    */

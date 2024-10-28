@@ -4,11 +4,11 @@ import {
   InitBJFParams,
   fromInitBJFParamsToBJFConfig,
 } from "../model/InitBJFParams";
-import { configApi } from "@/entities/Factory";
+import { factoryApi } from "@/entities/Factory";
 
 export async function initBJF(props: InitBJFParams) {
   const { selectedLanguages } = props;
   await installTemplates(selectedLanguages);
   const config: FactoryConfig = fromInitBJFParamsToBJFConfig(props);
-  await configApi.writeFactoryJson(config, props.rootDir);
+  await factoryApi.writeFactoryJson(config, props.rootDir);
 }

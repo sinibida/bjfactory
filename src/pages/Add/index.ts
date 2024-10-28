@@ -1,12 +1,17 @@
 import { loadTemplate } from "@/shared/api/fs/template";
 import Logger from "@/shared/api/logger";
 import { getProblemInfo } from "@/shared/api/solvecac/api/problem";
-import { CommandModule } from "@/shared/types";
-import { getFolderName, getProblemFolderName } from "./logic";
-import { ploblemModel, problemApi } from "@/entities/problem";
+import { BaseProblemMetadata, CommandModule } from "@/shared/types";
+import { getProblemFolderName } from "./logic";
+import { Problem, problemApi } from "@/entities/Problem";
 import { askTemplate } from "@/features/SelectTemplate";
-
-type ProblemConfig = ploblemModel.ProblemConfig;
+import {
+  fetchProblemData,
+  getFolderName,
+  rawNameToId,
+  splitProblemString,
+} from "./lib";
+import { findProblemMetadataModule } from "@/entities/ProblemMetadata";
 
 interface Options {
   lang: string;
@@ -15,14 +20,16 @@ interface Options {
 async function Add(problem: string, options: Options) {
   const lang = options.lang ?? (await askTemplate("Select a template to use."));
 
-  // TODO: support different kind of 'problem input'
-  const { problemName, folderName } = await getProblemFolderName(problem, lang);
+  const splitProblem = splitProblemString(problem);
 
+  const { problemId, metadata, name } = await fetchProblemData(splitProblem);
+
+  const folderName = getFolderName(problemId, lang);
   await loadTemplate(folderName, lang);
 
-  const initialConfig: Partial<ProblemConfig> = {
-    id: folderName,
-    name: problemName,
+  const initialConfig: Partial<Problem> = {
+    metadata,
+    title: name,
     state: "active",
   };
 

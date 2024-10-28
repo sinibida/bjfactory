@@ -1,5 +1,5 @@
-import { configApi } from "@/entities/Factory";
-import { problemApi } from "@/entities/problem";
+import { factoryApi } from "@/entities/Factory";
+import { problemApi } from "@/entities/Problem";
 import Logger from "@/shared/api/logger";
 import { input } from "@inquirer/prompts";
 import path from "path";
@@ -25,7 +25,7 @@ async function askKeyword() {
 }
 
 async function getLastTarget() {
-  const { lastTarget } = await configApi.readFactoryJson();
+  const { lastTarget } = await factoryApi.readFactoryJson();
   return lastTarget;
 }
 
@@ -51,7 +51,7 @@ async function maybeKeywordToDir(keyword: string | undefined): Promise<string> {
 }
 
 async function writeDirToConfig(dir: string) {
-  await configApi.patchFactoryJson({
+  await factoryApi.patchFactoryJson({
     lastTarget: path.relative(process.cwd(), path.resolve(dir)),
   });
 }
