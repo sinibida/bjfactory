@@ -1,4 +1,4 @@
-import { configApi } from "@/entities/bjfConfig";
+import { configApi } from "@/entities/Factory";
 import { problemApi } from "@/entities/problem";
 import Logger from "@/shared/api/logger";
 import { input } from "@inquirer/prompts";
@@ -25,7 +25,7 @@ async function askKeyword() {
 }
 
 async function getLastTarget() {
-  const { lastTarget } = await configApi.readBJFConfig();
+  const { lastTarget } = await configApi.readFactoryJson();
   return lastTarget;
 }
 
@@ -51,7 +51,7 @@ async function maybeKeywordToDir(keyword: string | undefined): Promise<string> {
 }
 
 async function writeDirToConfig(dir: string) {
-  await configApi.patchBJFConfig({
+  await configApi.patchFactoryJson({
     lastTarget: path.relative(process.cwd(), path.resolve(dir)),
   });
 }

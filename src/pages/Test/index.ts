@@ -10,7 +10,7 @@ import { CommandModule } from "../../shared/types/index.js";
 import { printDiff } from "./utils.js";
 import { ensureArray } from "../../shared/utils/typeutil.js";
 import { problemApi, ProblemConfig } from "@/entities/problem/index.js";
-import { configApi } from "@/entities/bjfConfig/index.js";
+import { configApi } from "@/entities/Factory/index.js";
 import { getTargetDirectory } from "@/features/SelectTarget/index.js";
 
 interface Options {

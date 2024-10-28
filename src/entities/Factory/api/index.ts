@@ -1,6 +1,6 @@
-import { BJFConfig } from "@/entities/bjfConfig/model/BJFConfig";
 import fs from "fs/promises";
 import path from "path";
+import { Factory } from "..";
 
 const configFileName = "factory.json";
 
@@ -8,7 +8,7 @@ function getConfigPath(dir: string) {
   return path.resolve(dir, configFileName);
 }
 
-export async function writeBJFConfig(config: BJFConfig, rootDir: string = ".") {
+export async function writeFactoryJson(config: Factory, rootDir: string = ".") {
   const stringified = JSON.stringify(config, undefined, 2); // TODO: better json editting
   await fs.writeFile(getConfigPath(rootDir), stringified, {
     encoding: "utf8",
@@ -17,25 +17,25 @@ export async function writeBJFConfig(config: BJFConfig, rootDir: string = ".") {
   });
 }
 
-export async function readBJFConfig(rootDir: string = "."): Promise<BJFConfig> {
+export async function readFactoryJson(rootDir: string = "."): Promise<Factory> {
   const content = await fs.readFile(getConfigPath(rootDir), {
     encoding: "utf8",
     flag: fs.constants.O_RDONLY,
   });
 
   const obj = JSON.parse(content); // Type check
-  return obj as BJFConfig;
+  return obj as Factory;
 }
 
-export async function patchBJFConfig(
-  config: Partial<BJFConfig>,
+export async function patchFactoryJson(
+  config: Partial<Factory>,
   rootDir?: string,
-): Promise<BJFConfig> {
-  let obj = await readBJFConfig(rootDir);
+): Promise<Factory> {
+  let obj = await readFactoryJson(rootDir);
   obj = {
     ...obj,
     ...config,
   };
-  await writeBJFConfig(obj);
+  await writeFactoryJson(obj);
   return obj;
 }
